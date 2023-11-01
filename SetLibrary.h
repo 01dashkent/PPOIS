@@ -12,6 +12,7 @@ namespace SetLibrary {
 		Set();
 		Set(std::string);
 		Set(char*);
+		Set(char);
 		bool isEmpty() const;
 		void push(char);
 		void push(std::string);
@@ -29,7 +30,7 @@ namespace SetLibrary {
 		Set& operator*=(Set);
 		Set operator-(Set) const;
 		Set& operator-=(Set);
-		void boolean(std::vector<std::string>*, Set, int) const;
+		Set boolean() const;
 		std::vector<Set> getSubsets() const;
 		std::string getElement() const;
 		void print() const;
