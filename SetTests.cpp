@@ -1,6 +1,6 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CppUnitTest.h"
-#include "../SetLibrary/SetLibrary.cpp"
+#include "..\SetLibrary\SetLibrary.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace SetLibrary;
@@ -165,5 +165,34 @@ public:
 			string expected = "{b,c}";
 			Assert::AreEqual(expected, setString);
 		}
+	};
+
+	TEST_CLASS(Boolean) {
+public:
+	TEST_METHOD(BooleanTest1) {
+		Set set("{a,b}");
+		Set boolean = set.boolean();
+		std::string booleanString = "";
+		boolean.getSubsetsToString(&booleanString);
+		string expected = "{{},{a},{b},{a,b}}";
+		Assert::IsTrue(expected == booleanString);
+	}
+
+	TEST_METHOD(BooleanTest2) {
+		Set set("{a,b,{c},{d}}");
+		Set boolean = set.boolean();
+		std::string booleanString = "";
+		boolean.getSubsetsToString(&booleanString);
+		string expected = "{{},{a},{b},{a,b},{{c}},{a,{c}},{b,{c}},{a,b,{c}},{{d}},{a,{d}},{b,{d}},{a,b,{d}},{{c},{d}},{a,{c},{d}},{b,{c},{d}},{a,b,{c},{d}}}";
+		Assert::IsTrue(expected == booleanString);
+	}
+	TEST_METHOD(BooleanTest3) {
+		Set set("{{a},{b}}");
+		Set boolean = set.boolean();
+		std::string booleanString = "";
+		boolean.getSubsetsToString(&booleanString);
+		string expected = "{{},{{a}},{{b}},{{a},{b}}}";
+		Assert::IsTrue(expected == booleanString);
+	}
 	};
 }
