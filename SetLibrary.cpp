@@ -5,11 +5,15 @@ namespace SetLibrary {
 	Set::Set() {};
 
 	Set::Set(std::string input) {
-		if (input[0] != '{' || input.back() != '}') {
-			throw std::runtime_error("invalid input");
-		}
-		if (input.size() == 2) {
+		if (input.size() == 1) {
+			element = input[0];
 			return;
+		}
+		if (input.size() == 2 && input[0] == '{' && input[1] == '}') {
+			return;
+		}
+		else if (input.size() == 2) {
+			throw std::runtime_error("invalid input");
 		}
 		std::string temp;
 		for (int i = 1; i < input.size() - 1; i++) {
@@ -19,7 +23,7 @@ namespace SetLibrary {
 				temp = "";
 				break;
 			case ',':
-				push(Set("{" + temp + "}"));
+				push(Set(temp[0]));
 				temp = "";
 				break;
 			default:
@@ -28,16 +32,20 @@ namespace SetLibrary {
 			}
 		}
 		if (subsets.size() == 0) {
-			element = temp;
+			push(Set((char)temp[0]));
 		}
 		else if (subsets.size() != 0 && temp != "") {
-			push(Set("{" + temp + "}"));
+			push(Set((char)temp[0]));
 		}
 	}
 
 	Set::Set(char* input) {
 		std::string stringInput(input);
 		*this = Set(stringInput);
+	}
+
+	Set::Set(char input) {
+		element = input;
 	}
 
 	Set Set::recursiveCreation(std::string input, int* position) {
@@ -55,11 +63,11 @@ namespace SetLibrary {
 				element.push(recursiveCreation(input, position));
 				break;
 			case ',':
-				element.push(Set("{" + temp + "}"));
+				element.push(Set(temp[0]));
 				temp = "";
 				break;
 			case '}':
-				element.push(Set("{" + temp + "}"));
+				element.push(Set(temp[0]));
 				*position = i + 1;
 				return element;
 			default:
@@ -74,7 +82,7 @@ namespace SetLibrary {
 		if (checkPresence(element)) {
 			return;
 		}
-		subsets.push_back(Set("{" + element + "}"));
+		subsets.push_back(Set(element));
 		if (subsets.size() > 1) {
 			this->element = "";
 		}
@@ -95,9 +103,10 @@ namespace SetLibrary {
 	}
 
 	void Set::push(char element) {
-		std::string elementString = "";
-		elementString += element;
-		push(elementString);
+		//std::string elementString = "";
+		//elementString+= element;
+		//push(elementString);
+		push(Set(element));
 	}
 
 	void Set::pop(std::string element) {
@@ -284,27 +293,35 @@ namespace SetLibrary {
 		for (int i = 0; i < subsets.size(); i++)
 			if (subsets[i].getElement() == element.getElement() && subsets[i].cardinality() == element.cardinality()) {
 				std::vector<Set> sets = subsets[i].getSubsets();
-				std::vector<Set> otherSets = subsets[i].getSubsets();
+				std::vector<Set> otherSets = element.getSubsets();
 				if (sets.size() == 0) {
 					return true;
 				}
 				for (int j = 0; j < sets.size(); j++)
-					if (sets[j].getElement() == otherSets[j].getElement()) {
-						return true;
+					if (sets[j].getElement() != otherSets[j].getElement()) {
+						return false;
 					}
+				return true;
 			}
 		return false;
 	}
 
-	void Set::boolean(std::vector<std::string>* boolean, Set temp, int position) const {
-		if (position == subsets.size()) {
-			std::string result;
-			temp.getSubsetsToString(&result);
-			boolean->push_back(result);
-			return;
+	Set Set::boolean() const {
+		Set result;
+		if (subsets.size() == 0) {
+			result.push(Set());
+			result.push(element);
+			return result;
 		}
-		this->boolean(boolean, temp, position + 1);
-		temp.push(subsets[position]);
-		this->boolean(boolean, temp, position + 1);
+		int subsetsCount = pow(2, (int)subsets.size());
+		for (int i = 0; i < subsetsCount; i++) {
+			Set temp;
+			for (int j = 0; j < subsets.size(); j++)
+				if (i & (1 << j))
+					temp.push(subsets[j]);
+			result.push(temp);
+			//temp.print();
+		}
+		return result;
 	}
 }
