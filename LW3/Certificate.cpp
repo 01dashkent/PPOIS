@@ -1,7 +1,7 @@
 #include "Certificate.h"
 
 void Certificate::createCertificate() {
-    std::cout << "Creating certificate with title: " << title << " on the online learning platform.\n";
+    std::cout << "Creating certificate with title: " << title;
 }
 
 std::string Certificate::calculateCertificateLevel(double userGrade) const {
