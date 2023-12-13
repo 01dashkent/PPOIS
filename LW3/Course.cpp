@@ -9,7 +9,7 @@ void Course::evaluate() {
 }
 
 void Course::display() const {
-    std::cout << "Course: " << title << " (" << duration << " hours)";
+    std::cout << "Course: " << title << " (" << duration << ")";
 }
 
 double Course::calculateAverageRating(std::vector<double> ratings) const {
