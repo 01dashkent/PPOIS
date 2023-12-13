@@ -1,7 +1,7 @@
 #include "Administrator.h"
 
 void Administrator::display() const {
-    std::cout << "Administrator: " << name << " (Level: " << accessLevel << ") on the online learning platform.\n";
+    std::cout << "Administrator: " << name << " Level: " << accessLevel;
 }
 
 double Administrator::calculateAdminRating(int numberOfTasks) const {
