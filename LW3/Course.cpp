@@ -27,3 +27,47 @@ double Course::calculateTimeSpent(double averageTimePerModule, int numberOfModul
         throw std::invalid_argument("Number of modules cannot be zero");
     return averageTimePerModule * numberOfModules;
 }
+
+std::string Course::getTitle() const {
+    return title;
+}
+
+void Course::setTitle(std::string value) {
+    title = value;
+}
+
+void Course::addStudent(Student* student) {
+    students.insert(student);
+}
+
+void Course::removeStudent(Student* student) {
+    students.erase(student);
+}
+
+Teacher* Course::getOwner() const {
+    return owner;
+}
+
+void Course::setOwner(Teacher* value) {
+    owner = value;
+}
+
+std::string Course::getDescription() const {
+    return description;
+}
+
+void Course::setDescription(std::string value) {
+    description = value;
+}
+
+int Course::getDuration() const {
+    return duration;
+}
+
+void Course::setDuration(int value) {
+    duration = value;
+}
+
+const std::set<Student*>& Course::getStudents() const {
+    return students;
+}

@@ -1,13 +1,21 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <set>
+
+
+class Teacher;
+class Student;
 
 class Course {
-public:
+private:
+    std::set<Student*> students;
     std::string title;
     std::string description;
-    int duration;
-    std::string instructor;
+    int duration = 0;
+    Teacher* owner = nullptr;
+
+public:
 
     void viewMaterials();
 
@@ -18,4 +26,26 @@ public:
     double calculateAverageRating(std::vector<double> ratings) const;
 
     double calculateTimeSpent(double averageTimePerModule, int numberOfModules) const;
+
+    void addStudent(Student* student);
+
+    void removeStudent(Student* student);
+
+    std::string getTitle() const;
+
+    void setTitle(std::string title);
+
+    std::string getDescription() const;
+
+    void setDescription(std::string description);
+
+    int getDuration() const;
+
+    void setDuration(int duration);
+
+    Teacher* getOwner() const;
+
+    void setOwner(Teacher* value);
+
+    const std::set<Student*>& getStudents() const;
 };

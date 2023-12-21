@@ -23,3 +23,35 @@ double User::calculateProgressPercentage(int completedModules, int totalModules)
         throw std::invalid_argument("Total modules cannot be zero");
     return (static_cast<double>(completedModules) / totalModules) * 100.0;
 }
+
+std::string User::getName() const {
+    return name;
+}
+
+void User::setname(std::string value) {
+    name = value;
+}
+
+std::string User::getEmail() const {
+    return email;
+}
+
+void User::setEmail(std::string value) {
+    email = value;
+}
+
+std::string User::getPassword() const {
+    return password;
+}
+
+void User::setPassword(std::string value) {
+    password = value;
+}
+
+std::string User::getPersonLogin() const {
+    return personLogin;
+}
+
+void User::setPersonLogin(std::string value) {
+    personLogin = value;
+}

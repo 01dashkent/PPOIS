@@ -2,14 +2,11 @@
 #include "Course.h"
 
 class Module : public Course {
-public:
-    std::string moduleName;
+private:
     std::string content;
-    std::string startTime;
-    std::string requirements;
+    int startTime;
 
-    void loadMaterials();
-
+public:
     void checkCompletion();
 
     void display() const override;
@@ -17,4 +14,12 @@ public:
     double calculateModuleDifficulty() const;
 
     double calculateStudyTime(double averageStudySpeed) const;
+
+    std::string getContent() const;
+
+    void setContent(std::string value);
+
+    int getStartTime() const;
+
+    void setStartTime(int value);
 };

@@ -1,20 +1,25 @@
 #pragma once
 #include <iostream>
+#include <vector>
+#include "User.h"
 
 class Forum {
+private:
+    User* author = nullptr;
+    std::string theme = "";
+    std::vector<std::string> messages;
 public:
-    std::string topic;
-    std::string author;
-    std::string creationTime;
-    std::string message;
+    void sendMessage(std::string message);
 
-    void createTopic();
-
-    void sendMessage();
-
-    void rateAnswers();
+    void showMessages();
 
     double calculateDiscussionActivity(int numberOfMessages, int numberOfRatings) const;
 
-    double calculateTopicPopularity(int numberOfViews, int numberOfReplies) const;
+    User* getAuthor() const;
+
+    void setAuthor(User* value);
+
+    std::string getTheme() const;
+
+    void setTheme(std::string value);
 };

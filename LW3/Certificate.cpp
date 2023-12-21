@@ -1,9 +1,5 @@
 #include "Certificate.h"
 
-void Certificate::createCertificate() {
-    std::cout << "Creating certificate with title: " << title;
-}
-
 std::string Certificate::calculateCertificateLevel(double userGrade) const {
     if (userGrade < 0 || userGrade > 100) {
         throw std::invalid_argument("User grade must be between 0 and 100.");
@@ -20,4 +16,20 @@ std::string Certificate::calculateCertificateLevel(double userGrade) const {
 
 std::string Certificate::calculateCertificateStatus(bool isCompleted) const {
     return (isCompleted) ? "Issued" : "Not Issued";
+}
+
+std::string Certificate::getIssueDate() const {
+    return issueDate;
+}
+
+void Certificate::setIssuedate(std::string value) {
+    issueDate = value;
+}
+
+std::string Certificate::getLevel() const {
+    return level;
+}
+
+void Certificate::setLevel(std::string value) {
+    level = value;
 }

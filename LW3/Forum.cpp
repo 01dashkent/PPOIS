@@ -1,21 +1,32 @@
 #include "Forum.h"
 
-void Forum::createTopic() {
-    std::cout << "Creating forum topic: " << topic;
+void Forum::sendMessage(std::string message) {
+    messages.push_back(message);
 }
 
-void Forum::sendMessage() {
-    std::cout << "Sending message in forum topic: " << topic << message;
-}
-
-void Forum::rateAnswers() {
-    std::cout << "Rating answers in forum topic: " << topic;
+void Forum::showMessages() {
+    std::cout << theme << std::endl << author->getName() << std::endl;
+    for (auto message : messages) {
+        std::cout << message << std::endl;
+    }
 }
 
 double Forum::calculateDiscussionActivity(int numberOfMessages, int numberOfRatings) const {
     return numberOfMessages * 0.7 + numberOfRatings * 0.3;
 }
 
-double Forum::calculateTopicPopularity(int numberOfViews, int numberOfReplies) const {
-    return numberOfViews * 0.6 + numberOfReplies * 0.4;
+User* Forum::getAuthor() const {
+    return author;
+}
+
+void Forum::setAuthor(User* value) {
+    author = value;
+}
+
+std::string Forum::getTheme() const {
+    return theme;
+}
+
+void Forum::setTheme(std::string value) {
+    theme = value;
 }

@@ -1,11 +1,7 @@
 #include "Test.h"
 
-void Test::generateTest() {
-    std::cout << "Generating test for course: " << title;
-}
-
 void Test::checkResults() {
-    std::cout << "Checking results for test in course: " << title;
+    std::cout << "Checking results for test in course: " << getTitle();
 }
 
 double Test::calculateTestDifficulty() const {
@@ -17,4 +13,17 @@ double Test::calculateTestTime(double averageAnswerTime) const {
         throw std::invalid_argument("Average answer time must be greater than zero.");
     }
     return averageAnswerTime * questions.size();
+}
+
+const std::vector<std::string>& Test::getQuestions() const {
+    return questions;
+}
+
+const std::vector<std::string>& Test::getAnswers() const {
+    return answers;
+}
+
+void Test::addQuestionAnswer(std::string question, std::string answer) {
+    questions.push_back(question);
+    answers.push_back(answer);
 }

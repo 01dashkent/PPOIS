@@ -1,19 +1,15 @@
 #include "Module.h"
 
-void Module::loadMaterials() {
-    std::cout << "Loading materials for module: " << moduleName << " of Course: " << title;
-}
-
 void Module::checkCompletion() {
-    std::cout << "Checking completion of module: " << moduleName << " of Course: " << title;
+    std::cout << "Checking completion of module: " << getTitle();
 }
 
 void Module::display() const {
-    std::cout << "Module: " << moduleName << " of Course: " << title;
+    std::cout << "Module: " << getTitle();
 }
 
 double Module::calculateModuleDifficulty() const {
-    return requirements.length() * 1.5;
+    return getDescription().length() * 1.5;
 }
 
 double Module::calculateStudyTime(double averageStudySpeed) const {

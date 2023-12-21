@@ -2,16 +2,19 @@
 #include "Course.h"
 
 class Test : public Course {
-public:
+private:
     std::vector<std::string> questions;
-    int duration;
     std::vector<std::string> answers;
-
-    void generateTest();
-
+public:
     void checkResults();
+
+    void addQuestionAnswer(std::string question,std::string answer);
 
     double calculateTestDifficulty() const;
 
     double calculateTestTime(double averageAnswerTime) const;
+
+    const std::vector<std::string>& getQuestions() const;
+
+    const std::vector<std::string>& getAnswers() const;
 };
